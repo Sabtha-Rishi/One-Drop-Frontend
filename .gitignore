@@ -5,8 +5,6 @@
 /.pnp
 .pnp.js
 
-#Media Temp
-/Files
 
 # testing
 /coverage
