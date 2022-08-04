@@ -17,8 +17,6 @@ const Header = () => {
       />
 
       <ul className="navigation-large">
-        {/* <a className="nav-link"> Home </a>
-        <a className="nav-link"> Find Donor </a> */}
         <Link className="nav-link" to="/">
           Home
         </Link>
@@ -29,7 +27,7 @@ const Header = () => {
           Profile
         </a>
 
-        <button className="nav-link-donate" onClick={() => navigate("/")}>
+        <button className="nav-link-donate" onClick={() => navigate("/requests")}>
           Donate{" "}
         </button>
       </ul>
