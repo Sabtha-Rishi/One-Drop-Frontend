@@ -1,30 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import data from "../components/__data";
 import { Route, Link, Routes, useParams } from "react-router-dom";
 import { GoVerified } from "react-icons/go";
-import {
-  FaTruckPickup,
-  FaShareAlt,
-  FaMapMarked,
-} from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { FaTruckPickup, FaShareAlt, FaMapMarked } from "react-icons/fa";
 import { AiFillCaretRight, AiFillHeart } from "react-icons/ai";
-import {
-  BsFillDropletFill,
-} from "react-icons/bs";
+import { BsFillDropletFill } from "react-icons/bs";
 import { RiWhatsappFill } from "react-icons/ri";
 
 const SingleRequestMini = ({ requestData }) => {
-//   const requestData = req;
-    console.log(requestData)
+  //   const requestData = req;
+  console.log(requestData);
+
+  const navigate = useNavigate();
+
+  const handleDetailsClick = () => {
+    navigate(`/requests/${requestData._id}`);
+  };
+
   return (
     <RequestContainer>
       <h1 className="req-patientName">
         {requestData.patientName}
         <p className="req-bloodGrp">
-          <BsFillDropletFill /> {requestData.bloodGroup}
+          <BsFillDropletFill /> {requestData.bloodGrp}
         </p>
       </h1>
+
       {(requestData.isDrop ||
         requestData.isPickup ||
         requestData.isVerified) && (
@@ -51,7 +54,7 @@ const SingleRequestMini = ({ requestData }) => {
       )}
 
       <div className="cta">
-        <button className="req-donate-call">
+        <button className="req-donate-call" onClick={handleDetailsClick}>
           <AiFillCaretRight />
           Details
         </button>
@@ -86,8 +89,8 @@ const SingleRequestMini = ({ requestData }) => {
 const RequestContainer = styled.div`
   display: flex;
   flex-direction: column;
-  min-width: 400px;
-  max-width: 400px;
+  min-width: 700px;
+  max-width: 700px;
   border-radius: 10px;
   overflow: hidden;
   padding: 10px 30px;
@@ -96,7 +99,7 @@ const RequestContainer = styled.div`
   box-shadow: 10px 20px 20px #e3e3e3;
   gap: 20px;
 
-  @media only screen and (max-width: 500px) {
+  @media only screen and (max-width: 700px) {
     & {
       min-width: 90vw;
       max-width: 90vw;
@@ -112,6 +115,7 @@ const RequestContainer = styled.div`
     flex-direction: row;
     justify-content: space-between;
     gap: 30px;
+    margin-bottom: 0;
   }
 
   .req-units {
@@ -138,6 +142,10 @@ const RequestContainer = styled.div`
     color: #e85151;
     padding-top: 5px;
     transition-duration: 0.4s;
+  }
+
+  .req-hospital{
+    margin-top: 0;
   }
 
   .req-bloodGrp:hover {
