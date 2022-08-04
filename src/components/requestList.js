@@ -1,28 +1,27 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Request from "./singleRequest";
 import styled from "styled-components";
-import data from "../components/__data";
+import data from "./__data";
+import RequestsAPI from "../api/requests.api";
 
-const requestList = () => {
-  const requests = data.requestsData;
+const RequestList = ( {requests}) => {
+  // const [requests, setRequests] = useState([]);
 
-  console.log(requests)
+  // useEffect(() => {
+  //   RequestsAPI.allRequests(setRequests);
+  // }, []);
+
+  console.log(requests);
   return (
-    <RequestList>
+    <ReqList>
       {requests.map((req) => {
         return <Request requestData={req} key={req.id} />;
       })}
-      {requests.map((req) => {
-        return <Request requestData={req} key={req.id} />;
-      })}
-      {requests.map((req) => {
-        return <Request requestData={req} key={req.id} />;
-      })}
-    </RequestList>
+    </ReqList>
   );
 };
 
-const RequestList = styled.div`
+const ReqList = styled.div`
   display: grid;
   gap: 50px 50px;
   grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
@@ -37,4 +36,4 @@ const RequestList = styled.div`
     }
   }
 `;
-export default requestList;
+export default RequestList;

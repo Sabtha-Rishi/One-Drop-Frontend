@@ -34,7 +34,7 @@ const login = async (data, setIsAuthenticated, setUser) => {
   }
 };
 
-const getUser = async (setIsAuthenticated, setUser, setIsLoading) => {
+const getUser = async (setIsAuthenticated, setUser) => {
   try {
     const response = await axios
       .create()
@@ -43,16 +43,13 @@ const getUser = async (setIsAuthenticated, setUser, setIsLoading) => {
     if (response.data.isAuthenticated) {
       setIsAuthenticated(true);
       setUser(response.data.user);
-      setIsLoading(false);
     }
     if (!response.data.isAuthenticated) {
       setIsAuthenticated(false);
       setUser({});
-      setIsLoading(false);
     }
   } catch (err) {
     setIsAuthenticated(false);
-    setIsLoading(false);
   }
 };
 
@@ -68,7 +65,6 @@ const updateUser = async (setIsEditing, data, setUser) => {
       setIsEditing(false);
       setUser(response.data.user);
       console.log(response.data.user, "Updated");
-
     }
     if (!response.data.isUpdated) {
     }

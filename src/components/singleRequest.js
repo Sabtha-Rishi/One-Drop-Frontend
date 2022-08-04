@@ -19,14 +19,14 @@ import {
 } from "react-icons/bs";
 import { RiWhatsappFill, RiDownloadCloudFill } from "react-icons/ri";
 
-const SingleRequest = ({requestData1}) => {
-  const requestData = data.singleReq;
+const SingleRequest = ({requestData}) => {
+  // const requestData = data.singleReq;
 
   return (
     <RequestContainer>
       <h1 className="req-patientName">
         {requestData.patientName}
-        <p className="req-bloodGrp"><BsFillDropletFill/> {requestData.bloodGroup}</p>
+        <p className="req-bloodGrp"><BsFillDropletFill/> {requestData.bloodGrp}</p>
       </h1>
       {(requestData.isDrop ||
         requestData.isPickup ||
@@ -85,7 +85,7 @@ const SingleRequest = ({requestData1}) => {
         </p>
         <p className="req-details-li">
           {" "}
-          <FaHospitalSymbol /> {requestData.hospital}{" "}
+          <FaHospitalSymbol /> {requestData.hospitalName}{" "}
         </p>
         <p className="req-details-li">
           {" "}

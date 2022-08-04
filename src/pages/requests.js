@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import RequestList from "../components/requestList";
 
-const requests = () => {
-  return <AllRequests>requests</AllRequests>;
+const requests = ({ requests }) => {
+  return (
+    <AllRequests>
+      <RequestList requests={requests} />
+    </AllRequests>
+  );
 };
 
 export default requests;
@@ -11,7 +16,7 @@ const AllRequests = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  width: 70vw;
+  width: 80vw;
   margin: 50px auto;
   overflow: hidden;
   padding: 10px 30px;
