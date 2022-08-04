@@ -22,8 +22,30 @@ const allRequests = async (setRequests, setIsLoading) => {
   }
 };
 
+
+const singleRequest = async (setRequest, reqId)=>{
+   try {
+     const response = await axios
+       .create()
+       .get(`http://localhost:8000/requests/${reqId}`);
+     if (response.data.isSuccess) {
+       setRequest(response.data.request);
+       console.log(response.data.request)
+     }
+
+     if (!response.data.isSuccess) {
+       setRequest([]);
+       console.log(response.data.err);
+     }
+   } catch (err) {
+     console.log(err.message);
+     setRequest([]);
+   }
+}
+
 const RequestsApi = {
   allRequests,
+  singleRequest,
 };
 
 export default RequestsApi;

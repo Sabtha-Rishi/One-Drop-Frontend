@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import data from "../components/__data";
 import { Route, Link, Routes, useParams } from "react-router-dom";
@@ -18,16 +18,29 @@ import {
   BsFillDropletFill,
 } from "react-icons/bs";
 import { RiWhatsappFill, RiDownloadCloudFill } from "react-icons/ri";
+import RequestsAPI from "../api/requests.api";
 
-const SingleRequest = ({requestData}) => {
-  // const requestData = data.singleReq;
+const SingleRequest = ({ requestData1 }) => {
+  const reqId = useParams().reqId;
+
+  const [request, setRequest] = useState([]);
+  // const navigate = useNavigate();
+
+  useEffect(() => {
+    RequestsAPI.singleRequest(setRequest, reqId);
+  }, []);
+
+  const requestData = request;
 
   return (
     <RequestContainer>
       <h1 className="req-patientName">
         {requestData.patientName}
-        <p className="req-bloodGrp"><BsFillDropletFill/> {requestData.bloodGrp}</p>
+        <p className="req-bloodGrp">
+          <BsFillDropletFill /> {requestData.bloodGrp}
+        </p>
       </h1>
+
       {(requestData.isDrop ||
         requestData.isPickup ||
         requestData.isVerified) && (
@@ -145,10 +158,11 @@ const SingleRequest = ({requestData}) => {
 const RequestContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 50vw;
   height: 100%;
   border-radius: 10px;
   overflow: hidden;
-  margin: 5%;
+  margin: 5% auto;
   padding: 10px;
   transition-duration: 0.4s;
   background-color: white;
@@ -157,6 +171,13 @@ const RequestContainer = styled.div`
 
   &:hover {
     transition-duration: 0.4s;
+  }
+  @media only screen and (max-width: 700px) {
+    & {
+      min-width: 90vw;
+      max-width: 90vw;
+      margin: 30px auto;
+    }
   }
 
   .req-patientName {
@@ -181,6 +202,9 @@ const RequestContainer = styled.div`
   }
 
   .req-bloodGrp {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     background-color: white;
     width: 100px;
     height: 30px;
@@ -190,9 +214,9 @@ const RequestContainer = styled.div`
     text-align: center;
     padding: 3px;
     padding-left: 8px;
-    font-size: 15px;
-    font-family: "Oswald";
+    font-size: 13px;
     color: #e85151;
+    font-weight: bold;
     padding-top: 5px;
     transition-duration: 0.4s;
   }
@@ -214,7 +238,6 @@ const RequestContainer = styled.div`
     text-align: left;
     text-justify: auto;
     font-size: 15px;
-    font-family: "Oswald";
     color: black;
     align-items: center;
   }
