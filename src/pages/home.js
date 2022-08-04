@@ -1,5 +1,5 @@
 import React from 'react'
-import RequestList from '../components/requests'
+import RequestList from '../components/requestList'
 import { useNavigate } from "react-router-dom";
 
 

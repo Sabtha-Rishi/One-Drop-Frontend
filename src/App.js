@@ -22,14 +22,19 @@ import SingleRequest from "./components/singleRequest";
 import Donor from "./components/donorProfile";
 
 import AccountsAPI from "./api/accounts";
+import RequestsAPI from "./api/requests.api";
+
 
 function App() {
   const [isLoading, setIsloading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState({});
+  const [requests, setRequests] = useState([]);
+
 
   useEffect(() => {
-    AccountsAPI.getUser(setIsAuthenticated, setUser, setIsloading);
+    AccountsAPI.getUser(setIsAuthenticated, setUser);
+    RequestsAPI.allRequests(setRequests, setIsloading);
   }, []);
 
   // useEffect(() => {
@@ -37,6 +42,7 @@ function App() {
   // }, [user]);
 
   console.log(isAuthenticated, user);
+  console.log(requests)
 
   if (isLoading) {
     return (
@@ -52,8 +58,8 @@ function App() {
       <Header />
 
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/requests" element={<Requests />} />
+        {/* <Route exact path="/" element={<Home />} /> */}
+        <Route exact path="/requests" element={<Requests requests={requests}/>} />
 
         <Route exact path="/accounts/register" element={<Register />} />
         <Route exact path="/donor/1" element={<Donor />} />
