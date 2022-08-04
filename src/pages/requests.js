@@ -4,9 +4,9 @@ import RequestList from "../components/requestList";
 
 const requests = ({ requests }) => {
   return (
-    <AllRequests>
+    <div>
       <RequestList requests={requests} />
-    </AllRequests>
+    </div>
   );
 };
 

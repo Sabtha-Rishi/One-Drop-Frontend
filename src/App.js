@@ -59,7 +59,16 @@ function App() {
 
       <Routes>
         {/* <Route exact path="/" element={<Home />} /> */}
-        <Route exact path="/requests" element={<Requests requests={requests}/>} />
+        <Route
+          exact
+          path="/requests"
+          element={<Requests requests={requests} />}
+        />
+        <Route
+          exact
+          path="/requests/:reqId"
+          element={<SingleRequest />}
+        />
 
         <Route exact path="/accounts/register" element={<Register />} />
         <Route exact path="/donor/1" element={<Donor />} />
