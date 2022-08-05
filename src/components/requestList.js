@@ -4,11 +4,13 @@ import styled from "styled-components";
 
 const RequestList = ({ requests }) => {
   return (
-    <ReqList>
-      {requests.map((req) => {
-        return <Request requestData={req} key={req._id} />;
-      })}
-    </ReqList>
+    requests.length > 0 && (
+      <ReqList>
+        {requests.map((req) => {
+          return <Request requestData={req} key={req._id} />;
+        })}
+      </ReqList>
+    )
   );
 };
 

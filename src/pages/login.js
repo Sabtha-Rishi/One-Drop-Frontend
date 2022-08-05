@@ -4,11 +4,12 @@ import loginGif from "../Media/loginGif.gif";
 import AccountsAPI from "../api/accounts";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ isAuthenticated, setIsAuthenticated, setUser }) => {
+const Login = ({ isAuthenticated, setIsAuthenticated }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  console.log(isAuthenticated);
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/profile");
@@ -22,7 +23,7 @@ const Login = ({ isAuthenticated, setIsAuthenticated, setUser }) => {
       email: email,
       password: password,
     };
-    AccountsAPI.login(formData, setIsAuthenticated, setUser);
+    AccountsAPI.login(formData, setIsAuthenticated);
   };
 
   return (

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useMemo, useCallback } from "react";
+
 axios.defaults.withCredentials = true;
 
 const register = async (newUser) => {
@@ -17,7 +17,7 @@ const register = async (newUser) => {
   }
 };
 
-const login = async (data, setIsAuthenticated, setUser) => {
+const login = async (data, setIsAuthenticated) => {
   try {
     const response = await axios
       .create()
@@ -25,7 +25,6 @@ const login = async (data, setIsAuthenticated, setUser) => {
 
     if (response.data.isAuthenticated) {
       setIsAuthenticated(true);
-      setUser(response.data.user);
     }
   } catch (err) {
     // console.log(err.message);
@@ -72,14 +71,30 @@ const getUser = async (setIsAuthenticated, setUser) => {
   }
 };
 
-const updateUser = async (setIsEditing, data, setUser) => {
+const isAuthenticated = async (setIsAuthenticated) => {
+  try {
+    const response = await axios
+      .create()
+      .get("http://localhost:8000/accounts/user");
+    if (response.data.isAuthenticated) {
+      setIsAuthenticated(true);
+    }
+    if (!response.data.isAuthenticated) {
+      setIsAuthenticated(false);
+    }
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+const updateUser = async (setIsUpdated, data, setUser) => {
   try {
     const response = await axios
       .create()
       .post("http://localhost:8000/accounts/user/update", data);
 
     if (response.data.isUpdated) {
-      setIsEditing(false);
+      setIsUpdated(true);
       setUser(response.data.user);
       return;
     }
@@ -96,6 +111,7 @@ const AccountsAPI = {
   getUser,
   updateUser,
   logout,
+  isAuthenticated,
 };
 
 export default AccountsAPI;

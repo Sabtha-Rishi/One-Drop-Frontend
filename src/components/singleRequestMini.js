@@ -93,7 +93,7 @@ const RequestContainer = styled.div`
   overflow: hidden;
   padding: 10px 30px;
   transition-duration: 0.4s;
-  background-color: white;
+  background-color: #fafafa;
   box-shadow: 10px 20px 20px #e3e3e3;
   gap: 20px;
 
@@ -127,7 +127,6 @@ const RequestContainer = styled.div`
   }
 
   .req-bloodGrp {
-    background-color: white;
     width: 100px;
     height: 30px;
     margin-top: 7px;
@@ -142,7 +141,7 @@ const RequestContainer = styled.div`
     transition-duration: 0.4s;
   }
 
-  .req-hospital{
+  .req-hospital {
     margin-top: 0;
   }
 
@@ -194,7 +193,6 @@ const RequestContainer = styled.div`
     display: flex;
     flex-direction: row;
     gap: 20px;
-    background-color: white;
     justify-content: left;
     align-items: center;
     width: auto;
@@ -218,7 +216,6 @@ const RequestContainer = styled.div`
   .req-contact {
     display: flex;
     flex-direction: column;
-    background-color: white;
   }
 
   .req-call-attender {
@@ -239,7 +236,7 @@ const RequestContainer = styled.div`
     display: flex;
     border-radius: 7px;
     color: black;
-    background-color: white;
+    background-color :#FAFAFA;
     border: none;
     height: 30px;
     justify-content: center;
@@ -282,7 +279,6 @@ const RequestContainer = styled.div`
     width: 100%;
     justify-content: center;
     align-items: center;
-    background-color: white;
     gap: 10px;
     margin-bottom: 10px;
     border: 2px solid black;

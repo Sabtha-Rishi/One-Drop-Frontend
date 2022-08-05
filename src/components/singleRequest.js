@@ -165,7 +165,7 @@ const RequestContainer = styled.div`
   margin: 5% auto;
   padding: 10px;
   transition-duration: 0.4s;
-  background-color: white;
+  background-color: #fafafa;
   box-shadow: 20px 10px 20px 10px #e3e3e3;
   gap: 20px;
 
@@ -205,7 +205,6 @@ const RequestContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 5px;
-    background-color: white;
     width: 100px;
     height: 30px;
     margin-top: 7px;
@@ -268,7 +267,6 @@ const RequestContainer = styled.div`
     display: flex;
     flex-direction: row;
     gap: 20px;
-    background-color: white;
     justify-content: left;
     align-items: center;
     width: auto;
@@ -294,7 +292,6 @@ const RequestContainer = styled.div`
     flex-direction: column;
     padding: 0px 10px;
     border-radius: 20px;
-    background-color: white;
     background-image: linear-gradient(to bottom right, #fbfafa, #ffffff);
     font-size: medium;
   }
@@ -311,9 +308,9 @@ const RequestContainer = styled.div`
   }
 
   .req-contact {
+    background-color: #fafafa;
     display: flex;
     flex-direction: column;
-    background-color: white;
   }
 
   .req-call-attender {
@@ -326,7 +323,7 @@ const RequestContainer = styled.div`
     width: 100%;
     justify-content: center;
     align-items: center;
-    background-color: #faf0f0;
+    background-color: #fafafa;
     gap: 10px;
     margin-bottom: 10px;
   }
@@ -334,11 +331,11 @@ const RequestContainer = styled.div`
     display: flex;
     border-radius: 7px;
     color: black;
-    background-color: white;
     border: none;
     height: 30px;
     justify-content: center;
     align-items: center;
+    background-color: #fafafa;
     gap: 10px;
     font-size: 13px;
   }
@@ -382,7 +379,6 @@ const RequestContainer = styled.div`
     width: 100%;
     justify-content: center;
     align-items: center;
-    background-color: white;
     gap: 10px;
     margin-bottom: 10px;
     border: 2px solid black;

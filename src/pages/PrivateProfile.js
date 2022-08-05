@@ -3,29 +3,32 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import DonorProfile from "../components/donorProfile";
 import EditProfile from "../components/editProfile";
-import AccountsAPI from "../api/accounts";
 import Popup from "reactjs-popup";
+import AccountsAPI from "../api/accounts";
 
-const PrivateProfile = ({
-  isAuthenticated,
-  setIsAuthenticated,
-  user,
-  setUser,
-  setIsRefreshed,
-}) => {
-  const navigate = useNavigate();
-
+const PrivateProfile = ({ isAuthenticated, setIsAuthenticated }) => {
+  const [user, setUser] = useState({});
   const [isEditing, setIsEditing] = useState(false);
+  const [isUpdated, setIsUpdated] = useState(false);
 
-  useEffect(() => {
-    AccountsAPI.getUser(setIsAuthenticated, setUser);
-  });
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/accounts/login");
     }
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    AccountsAPI.getUser(setIsAuthenticated, setUser);
+  }, []);
+
+  useEffect(() => {
+    if (isUpdated) {
+      AccountsAPI.getUser(setIsAuthenticated, setUser);
+    }
+    setIsUpdated(false);
+  }, [isUpdated]);
 
   useEffect(() => {
     if (isEditing) {
@@ -39,6 +42,10 @@ const PrivateProfile = ({
     AccountsAPI.logout(setIsAuthenticated, setUser);
   };
 
+  const handleMyRequests = () => {
+    navigate("/my-requests");
+  };
+
   return (
     <Profile>
       {isAuthenticated && (
@@ -48,7 +55,6 @@ const PrivateProfile = ({
           setIsEditing={setIsEditing}
         />
       )}
-
       <div className="user-actions">
         <button
           className="toggle-edit"
@@ -62,8 +68,11 @@ const PrivateProfile = ({
         <button className="toggle-edit" onClick={handleLogout}>
           Log Out
         </button>
-      </div>
 
+        <button className="toggle-edit" onClick={handleMyRequests}>
+          My Requests
+        </button>
+      </div>
       <div className="overlay">
         <Popup
           open={isEditing}
@@ -73,8 +82,8 @@ const PrivateProfile = ({
           <EditProfile
             user={user}
             setIsEditing={setIsEditing}
+            setIsUpdated={setIsUpdated}
             setUser={setUser}
-            setIsRefreshed={setIsRefreshed}
           />
         </Popup>
       </div>

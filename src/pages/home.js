@@ -1,12 +1,12 @@
 import React from 'react'
-import RequestList from '../components/requestList'
+import MyRequests from '../components/myRequests'
 import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
   return (
     <div>
-      <RequestList />
+      HOME
     </div>
   );
 }

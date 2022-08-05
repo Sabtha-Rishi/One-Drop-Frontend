@@ -3,13 +3,8 @@ import styled from "styled-components";
 import uploadIcon from "../Media/upload-icon.png";
 import AccountsAPI from "../api/accounts";
 
-const EditProfile = ({ user, setIsEditing, setUser, setIsRefreshed }) => {
+const EditProfile = ({ user, setIsEditing, setUser, setIsUpdated }) => {
   const [currentUser, setCurrentUser] = useState({});
-
-  // useEffect(() => {
-  //   setCurrentUser((prev) => user);
-  // }, []);
-  // console.log(currentUser);
 
   const onChange = (e) => {
     setCurrentUser({ ...currentUser, [e.target.name]: e.target.value });
@@ -20,8 +15,8 @@ const EditProfile = ({ user, setIsEditing, setUser, setIsRefreshed }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    AccountsAPI.updateUser(setIsEditing, currentUser, setUser);
-    setIsRefreshed((prevState) => !prevState);
+    AccountsAPI.updateUser(setIsUpdated, currentUser, setUser);
+    setIsEditing(false);
   };
   return (
     <Editor>
@@ -97,7 +92,6 @@ const EditProfile = ({ user, setIsEditing, setUser, setIsRefreshed }) => {
         <label className="form-label" htmlFor="gender">
           Gender
         </label>
-        defaultValue={"none"}
         <select
           className="option-input"
           name="gender"

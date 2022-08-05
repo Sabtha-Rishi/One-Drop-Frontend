@@ -4,12 +4,15 @@ import {
   Route,
   Link,
   useNavigate,
+  Navigate,
 } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 
 import "./App.css";
 import Header from "./components/header";
+import MyRequests from "./components/myRequests";
+
 import Home from "./pages/home";
 import Register from "./pages/register";
 import Loading from "./pages/loading";
@@ -22,46 +25,28 @@ import SingleRequest from "./components/singleRequest";
 import Donor from "./components/donorProfile";
 
 import AccountsAPI from "./api/accounts";
-import RequestsAPI from "./api/requests.api";
 
 function App() {
-  const [isLoading, setIsloading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isrefreshed, setIsRefreshed] = useState(true);
-
-  const [user, setUser] = useState({});
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
-    AccountsAPI.getUser(setIsAuthenticated, setUser);
-    RequestsAPI.allRequests(setRequests, setIsloading);
+    AccountsAPI.isAuthenticated(setIsAuthenticated);
   }, []);
 
-  useEffect(() => {
-    AccountsAPI.getUser(setIsAuthenticated, setUser);
-  }, [isrefreshed]);
-
-  if (isLoading) {
-    return (
-      <Router>
-        <Routes>
-          <Route exact path="/" element={<Loading />} />
-        </Routes>
-      </Router>
-    );
-  }
   return (
     <Router>
       <Header />
 
       <Routes>
-        {/* <Route exact path="/" element={<Home />} /> */}
+        <Route exact path="/" element={<Home />} />
         <Route
           exact
           path="/requests"
           element={<Requests requests={requests} />}
         />
         <Route exact path="/requests/:reqId" element={<SingleRequest />} />
+        <Route exact path="/my-requests" element={<MyRequests />} />
 
         <Route exact path="/accounts/register" element={<Register />} />
         <Route exact path="/donor/1" element={<Donor />} />
@@ -73,7 +58,6 @@ function App() {
             <Login
               isAuthenticated={isAuthenticated}
               setIsAuthenticated={setIsAuthenticated}
-              setUser={setUser}
             />
           }
         />
@@ -83,10 +67,7 @@ function App() {
           element={
             <MyProfile
               isAuthenticated={isAuthenticated}
-              setIsAuthenticated={isAuthenticated}
-              user={user}
-              setUser={setUser}
-              setIsRefreshed={setIsRefreshed}
+              setIsAuthenticated={setIsAuthenticated}
             />
           }
         />

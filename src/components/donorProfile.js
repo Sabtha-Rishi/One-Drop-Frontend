@@ -11,6 +11,7 @@ import { BsFillCalendarDateFill } from "react-icons/bs";
 import { GoPrimitiveDot } from "react-icons/go";
 
 const DonorProfile = ({ user }) => {
+  
   const donordata = user || data.singleDonor;
   let base64string;
 
@@ -109,7 +110,7 @@ const Profile = styled.div`
   padding: 10px 30px;
   transition-duration: 0.4s;
   background-color: #fafafa;
-  box-shadow: ${({isEditing})=> isEditing? '10px 20px 20px #e3e3e3' : ''};
+  box-shadow: ${({ isEditing }) => (isEditing ? "10px 20px 20px #e3e3e3" : "")};
 
   @media only screen and (max-width: 600px) {
     & {
@@ -136,12 +137,12 @@ const Profile = styled.div`
   .user-details {
     display: flex;
     flex-direction: column;
-    background-color: #f0f0f0;
+    background-color: #fafafa;
     margin: 0;
     gap: 7px;
     padding: 10px;
     border-radius: 7px;
-    box-shadow: 15px 10px 30px #e3e3e3;
+    /* box-shadow: 15px 10px 30px #e3e3e3; */
   }
 
   .user-details-li {
