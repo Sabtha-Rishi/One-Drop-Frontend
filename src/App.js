@@ -24,25 +24,22 @@ import Donor from "./components/donorProfile";
 import AccountsAPI from "./api/accounts";
 import RequestsAPI from "./api/requests.api";
 
-
 function App() {
   const [isLoading, setIsloading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isrefreshed, setIsRefreshed] = useState(true);
+
   const [user, setUser] = useState({});
   const [requests, setRequests] = useState([]);
-
 
   useEffect(() => {
     AccountsAPI.getUser(setIsAuthenticated, setUser);
     RequestsAPI.allRequests(setRequests, setIsloading);
   }, []);
 
-  // useEffect(() => {
-  //   AccountsAPI.getUser(setIsAuthenticated, setUser, setIsloading);
-  // }, [user]);
-
-  console.log(isAuthenticated, user);
-  console.log(requests)
+  useEffect(() => {
+    AccountsAPI.getUser(setIsAuthenticated, setUser);
+  }, [isrefreshed]);
 
   if (isLoading) {
     return (
@@ -64,11 +61,7 @@ function App() {
           path="/requests"
           element={<Requests requests={requests} />}
         />
-        <Route
-          exact
-          path="/requests/:reqId"
-          element={<SingleRequest />}
-        />
+        <Route exact path="/requests/:reqId" element={<SingleRequest />} />
 
         <Route exact path="/accounts/register" element={<Register />} />
         <Route exact path="/donor/1" element={<Donor />} />
@@ -93,6 +86,7 @@ function App() {
               setIsAuthenticated={isAuthenticated}
               user={user}
               setUser={setUser}
+              setIsRefreshed={setIsRefreshed}
             />
           }
         />

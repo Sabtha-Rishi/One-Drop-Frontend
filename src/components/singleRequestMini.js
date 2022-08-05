@@ -10,9 +10,7 @@ import { BsFillDropletFill } from "react-icons/bs";
 import { RiWhatsappFill } from "react-icons/ri";
 
 const SingleRequestMini = ({ requestData }) => {
-  //   const requestData = req;
-  console.log(requestData);
-
+  
   const navigate = useNavigate();
 
   const handleDetailsClick = () => {

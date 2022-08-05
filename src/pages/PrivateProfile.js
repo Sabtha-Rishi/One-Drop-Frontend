@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import DonorProfile from "../components/donorProfile";
@@ -11,21 +11,21 @@ const PrivateProfile = ({
   setIsAuthenticated,
   user,
   setUser,
+  setIsRefreshed,
 }) => {
   const navigate = useNavigate();
 
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      AccountsAPI.getUser(setIsAuthenticated, setUser);
-      setIsEditing(false);
-    }
-  }, []);
+    AccountsAPI.getUser(setIsAuthenticated, setUser);
+  });
 
-  if (!isAuthenticated) {
-    navigate("/accounts/login");
-  }
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/accounts/login");
+    }
+  }, [isAuthenticated]);
 
   useEffect(() => {
     if (isEditing) {
@@ -33,8 +33,11 @@ const PrivateProfile = ({
     } else {
       document.getElementsByClassName("overlay")[0].style.display = "none";
     }
-    AccountsAPI.getUser(setIsAuthenticated, setUser);
   }, [isEditing]);
+
+  const handleLogout = () => {
+    AccountsAPI.logout(setIsAuthenticated, setUser);
+  };
 
   return (
     <Profile>
@@ -46,14 +49,20 @@ const PrivateProfile = ({
         />
       )}
 
-      <button
-        className="toggle-edit"
-        onClick={(e) => {
-          setIsEditing(true);
-        }}
-      >
-        Edit
-      </button>
+      <div className="user-actions">
+        <button
+          className="toggle-edit"
+          onClick={(e) => {
+            setIsEditing(true);
+          }}
+        >
+          Edit
+        </button>
+
+        <button className="toggle-edit" onClick={handleLogout}>
+          Log Out
+        </button>
+      </div>
 
       <div className="overlay">
         <Popup
@@ -65,6 +74,7 @@ const PrivateProfile = ({
             user={user}
             setIsEditing={setIsEditing}
             setUser={setUser}
+            setIsRefreshed={setIsRefreshed}
           />
         </Popup>
       </div>
@@ -80,8 +90,6 @@ const Profile = styled.div`
     background-color: black;
     color: white;
     width: 100px;
-    margin: 0 auto;
-    max-width: 100%;
     height: 30px;
     font-size: 900;
     border: none;
@@ -100,6 +108,15 @@ const Profile = styled.div`
     background-color: rgba(1, 1, 1, 0.8);
     cursor: pointer;
     z-index: 1;
+  }
+
+  .user-actions {
+    display: flex;
+    gap: 50px;
+    margin: 0 auto;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-left;
   }
 `;
 

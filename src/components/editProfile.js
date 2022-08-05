@@ -3,7 +3,7 @@ import styled from "styled-components";
 import uploadIcon from "../Media/upload-icon.png";
 import AccountsAPI from "../api/accounts";
 
-const EditProfile = ({ user, setIsEditing, setUser }) => {
+const EditProfile = ({ user, setIsEditing, setUser, setIsRefreshed }) => {
   const [currentUser, setCurrentUser] = useState({});
 
   // useEffect(() => {
@@ -20,7 +20,8 @@ const EditProfile = ({ user, setIsEditing, setUser }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    AccountsAPI.updateUser(setIsEditing, currentUser, user, setUser);
+    AccountsAPI.updateUser(setIsEditing, currentUser, setUser);
+    setIsRefreshed((prevState) => !prevState);
   };
   return (
     <Editor>
@@ -36,7 +37,6 @@ const EditProfile = ({ user, setIsEditing, setUser }) => {
           value={currentUser.name || user.name}
           onChange={onChange}
         />
-
         <label className="form-label" htmlFor="phone">
           Phone
         </label>
@@ -47,7 +47,6 @@ const EditProfile = ({ user, setIsEditing, setUser }) => {
           value={currentUser.phone || user.phone}
           onChange={onChange}
         />
-
         <label className="form-label" htmlFor="age">
           Age
         </label>
@@ -58,11 +57,15 @@ const EditProfile = ({ user, setIsEditing, setUser }) => {
           value={currentUser.age || user.age}
           onChange={onChange}
         />
-
         <label className="form-label" htmlFor="bloodGrp">
           Blood Group
         </label>
-        <select className="option-input" name="bloodGrp" onChange={onChange}>
+        <select
+          className="option-input"
+          defaultValue={"none"}
+          name="bloodGrp"
+          onChange={onChange}
+        >
           <option className="input-option" name="none" selected hidden disabled>
             Select Blood Group
           </option>
@@ -91,11 +94,16 @@ const EditProfile = ({ user, setIsEditing, setUser }) => {
             O Negative
           </option>
         </select>
-
         <label className="form-label" htmlFor="gender">
           Gender
         </label>
-        <select className="option-input" name="gender" onChange={onChange}>
+        defaultValue={"none"}
+        <select
+          className="option-input"
+          name="gender"
+          defaultValue={"none"}
+          onChange={onChange}
+        >
           <option className="input-option" name="none" selected hidden disabled>
             Select Gender
           </option>
@@ -109,7 +117,6 @@ const EditProfile = ({ user, setIsEditing, setUser }) => {
             Transgender
           </option>
         </select>
-
         <div className="file-upload-content">
           <label>Profile Picture</label>
           <div className="form-group custom-drop-file text-center">
@@ -124,7 +131,6 @@ const EditProfile = ({ user, setIsEditing, setUser }) => {
             <p>Upload Picture</p>
           </div>
         </div>
-
         <input
           className="form-register"
           type="submit"

@@ -30,7 +30,6 @@ const singleRequest = async (setRequest, reqId)=>{
        .get(`http://localhost:8000/requests/${reqId}`);
      if (response.data.isSuccess) {
        setRequest(response.data.request);
-       console.log(response.data.request)
      }
 
      if (!response.data.isSuccess) {

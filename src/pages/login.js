@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import loginGif from "../Media/loginGif.gif";
 import AccountsAPI from "../api/accounts";
@@ -9,11 +9,11 @@ const Login = ({ isAuthenticated, setIsAuthenticated, setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  console.log(isAuthenticated);
-
-  if (isAuthenticated) {
-    window.location = "http://localhost:3000/profile";
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/profile");
+    }
+  }, [isAuthenticated]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,13 +22,7 @@ const Login = ({ isAuthenticated, setIsAuthenticated, setUser }) => {
       email: email,
       password: password,
     };
-
     AccountsAPI.login(formData, setIsAuthenticated, setUser);
-    console.log(isAuthenticated);
-
-    if (isAuthenticated) {
-      window.location = "http://localhost:3000/profile";
-    }
   };
 
   return (

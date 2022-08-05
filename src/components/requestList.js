@@ -1,14 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import Request from "./singleRequestMini";
 import styled from "styled-components";
-import data from "./__data";
 
-const RequestList = ( {requests}) => {
-  console.log(requests);
+const RequestList = ({ requests }) => {
   return (
     <ReqList>
       {requests.map((req) => {
-        return <Request requestData={req} key={req.id} />;
+        return <Request requestData={req} key={req._id} />;
       })}
     </ReqList>
   );

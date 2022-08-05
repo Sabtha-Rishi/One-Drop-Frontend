@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { useMemo, useCallback } from "react";
 axios.defaults.withCredentials = true;
 
 const register = async (newUser) => {
@@ -13,7 +13,7 @@ const register = async (newUser) => {
       });
     return response.data.isSuccess;
   } catch (err) {
-    console.log(err.message);
+    // console.log(err.message);
   }
 };
 
@@ -28,9 +28,28 @@ const login = async (data, setIsAuthenticated, setUser) => {
       setUser(response.data.user);
     }
   } catch (err) {
-    console.log(err.message);
-    setIsAuthenticated(false);
-    setUser({});
+    // console.log(err.message);
+    // setIsAuthenticated(false);
+    // setUser({});
+  }
+};
+
+const logout = async (setIsAuthenticated, setUser) => {
+  try {
+    const response = await axios
+      .create()
+      .post("http://localhost:8000/accounts/logout");
+
+    if (response.data.isSuccess) {
+      setIsAuthenticated(false);
+      setUser({});
+    }
+    if (!response.data.isSuccess) {
+      setIsAuthenticated(true);
+    }
+  } catch (err) {
+    // console.log(err.message);
+    // setIsAuthenticated(true);
   }
 };
 
@@ -49,7 +68,7 @@ const getUser = async (setIsAuthenticated, setUser) => {
       setUser({});
     }
   } catch (err) {
-    setIsAuthenticated(false);
+    // console.log(err.message);
   }
 };
 
@@ -59,17 +78,15 @@ const updateUser = async (setIsEditing, data, setUser) => {
       .create()
       .post("http://localhost:8000/accounts/user/update", data);
 
-    console.log(response.data);
-
     if (response.data.isUpdated) {
       setIsEditing(false);
       setUser(response.data.user);
-      console.log(response.data.user, "Updated");
+      return;
     }
     if (!response.data.isUpdated) {
     }
   } catch (err) {
-    console.log(err.message);
+    // console.log(err.message);
   }
 };
 
@@ -78,6 +95,7 @@ const AccountsAPI = {
   login,
   getUser,
   updateUser,
+  logout,
 };
 
 export default AccountsAPI;
