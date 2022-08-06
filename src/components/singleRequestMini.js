@@ -8,9 +8,9 @@ import { FaTruckPickup, FaShareAlt, FaMapMarked } from "react-icons/fa";
 import { AiFillCaretRight, AiFillHeart } from "react-icons/ai";
 import { BsFillDropletFill } from "react-icons/bs";
 import { RiWhatsappFill } from "react-icons/ri";
+import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 
 const SingleRequestMini = ({ requestData }) => {
-  
   const navigate = useNavigate();
 
   const handleDetailsClick = () => {
@@ -51,16 +51,6 @@ const SingleRequestMini = ({ requestData }) => {
         </div>
       )}
 
-      <div className="cta">
-        <button className="req-donate-call" onClick={handleDetailsClick}>
-          <AiFillCaretRight />
-          Details
-        </button>
-        <button className="req-donate" type="button">
-          {" "}
-          <AiFillHeart /> DONATE{" "}
-        </button>
-      </div>
       <div className="req-contact">
         {requestData.attenderPhone !== "" && (
           <div className="contact-cta">
@@ -79,6 +69,12 @@ const SingleRequestMini = ({ requestData }) => {
             </button>
           </div>
         )}
+        <div className="cta">
+          <button className="req-donate-call" onClick={handleDetailsClick}>
+            View details
+            <HiOutlineArrowNarrowRight />
+          </button>
+        </div>
       </div>
     </RequestContainer>
   );
@@ -236,7 +232,7 @@ const RequestContainer = styled.div`
     display: flex;
     border-radius: 7px;
     color: black;
-    background-color :#FAFAFA;
+    background-color: #fafafa;
     border: none;
     height: 30px;
     justify-content: center;
@@ -281,7 +277,7 @@ const RequestContainer = styled.div`
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
-    border: 2px solid black;
+    border: none;
     transition-duration: 0.4s;
   }
 

@@ -1,16 +1,23 @@
-import React from "react";
-import styled from "styled-components";
-import RequestList from "../components/requestList";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import RequestList from '../components/requestList';
+import RequestsApi from '../api/requests.api';
 
-const requests = ({ requests }) => {
-  return (
-    <div>
-      <RequestList requests={requests} />
-    </div>
-  );
+const Requests = () => {
+	const [requestsData, setRequestsData] = useState([]);
+
+	useEffect(() => {
+		RequestsApi.allRequests(setRequestsData);
+	}, []);
+
+	return (
+		<div>
+			<RequestList requests={requestsData} />
+		</div>
+	);
 };
 
-export default requests;
+export default Requests;
 
 const AllRequests = styled.div`
   display: flex;

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import logoDark from "../Media/logo-dark.png";
+import logoDark from "../Media/logo-light.png";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -46,7 +46,7 @@ const Navbar = styled.nav`
   max-width: 100vw;
   justify-content: space-between;
   overflow: hidden;
-  background-color: white;
+  background-color: black;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -70,7 +70,7 @@ const Navbar = styled.nav`
   }
 
   .nav-link {
-    color: black;
+    color: white;
     font-weight: bolder;
     cursor: pointer;
     text-decoration: none;

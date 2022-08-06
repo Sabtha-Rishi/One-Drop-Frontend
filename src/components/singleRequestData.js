@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import data from "../components/__data";
+import data from "./__data";
 import { Route, Link, Routes, useParams } from "react-router-dom";
 import { GoVerified } from "react-icons/go";
 import {
@@ -18,18 +18,8 @@ import {
   BsFillDropletFill,
 } from "react-icons/bs";
 import { RiWhatsappFill, RiDownloadCloudFill } from "react-icons/ri";
-import RequestsAPI from "../api/requests.api";
 
-const SingleRequest = ({ requestData1 }) => {
-  const reqId = useParams().reqId;
-
-  const [request, setRequest] = useState([]);
-  // const navigate = useNavigate();
-
-  useEffect(() => {
-    RequestsAPI.singleRequest(setRequest, reqId);
-  }, []);
-
+const SingleRequestData = ({ request }) => {
   const requestData = request;
 
   return (
@@ -168,6 +158,7 @@ const RequestContainer = styled.div`
   background-color: #fafafa;
   box-shadow: 20px 10px 20px 10px #e3e3e3;
   gap: 20px;
+  margin-bottom: 0;
 
   &:hover {
     transition-duration: 0.4s;
@@ -417,4 +408,4 @@ const RequestContainer = styled.div`
     border-bottom: 1px solid lightgrey;
   }
 `;
-export default SingleRequest;
+export default SingleRequestData;
