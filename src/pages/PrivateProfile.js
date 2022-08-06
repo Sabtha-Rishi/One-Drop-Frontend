@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import DonorProfile from "../components/donorProfile";
@@ -14,14 +14,13 @@ const PrivateProfile = ({ isAuthenticated, setIsAuthenticated }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    AccountsAPI.getUser(setIsAuthenticated, setUser);
+  }, []);
+  useEffect(() => {
     if (!isAuthenticated) {
       navigate("/accounts/login");
     }
   }, [isAuthenticated]);
-
-  useEffect(() => {
-    AccountsAPI.getUser(setIsAuthenticated, setUser);
-  }, []);
 
   useEffect(() => {
     if (isUpdated) {
@@ -49,30 +48,33 @@ const PrivateProfile = ({ isAuthenticated, setIsAuthenticated }) => {
   return (
     <Profile>
       {isAuthenticated && (
-        <DonorProfile
-          user={user}
-          isEditing={setIsEditing}
-          setIsEditing={setIsEditing}
-        />
+        <>
+          <DonorProfile
+            user={user}
+            isEditing={setIsEditing}
+            setIsEditing={setIsEditing}
+          />
+          <div className="user-actions">
+            <button
+              className="toggle-edit"
+              onClick={(e) => {
+                setIsEditing(true);
+              }}
+            >
+              Edit
+            </button>
+
+            <button className="toggle-edit" onClick={handleLogout}>
+              Log Out
+            </button>
+
+            <button className="toggle-edit" onClick={handleMyRequests}>
+              My Requests
+            </button>
+          </div>
+        </>
       )}
-      <div className="user-actions">
-        <button
-          className="toggle-edit"
-          onClick={(e) => {
-            setIsEditing(true);
-          }}
-        >
-          Edit
-        </button>
 
-        <button className="toggle-edit" onClick={handleLogout}>
-          Log Out
-        </button>
-
-        <button className="toggle-edit" onClick={handleMyRequests}>
-          My Requests
-        </button>
-      </div>
       <div className="overlay">
         <Popup
           open={isEditing}
