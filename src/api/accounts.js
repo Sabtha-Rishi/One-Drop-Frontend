@@ -71,6 +71,23 @@ const getUser = async (setIsAuthenticated, setUser) => {
   }
 };
 
+const getSingleUser = async (setUser, id) => {
+  try {
+    const response = await axios
+      .create()
+      .get(`http://localhost:8000/accounts/${id}`);
+
+    if (response.data.isSuccess) {
+      setUser(response.data.user);
+    }
+    if (!response.data.isSuccess) {
+      setUser({});
+    }
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 const isAuthenticated = async (setIsAuthenticated) => {
   try {
     const response = await axios
@@ -105,6 +122,8 @@ const updateUser = async (setIsUpdated, data, setUser) => {
   }
 };
 
+
+
 const AccountsAPI = {
   register,
   login,
@@ -112,6 +131,7 @@ const AccountsAPI = {
   updateUser,
   logout,
   isAuthenticated,
+  getSingleUser,
 };
 
 export default AccountsAPI;
