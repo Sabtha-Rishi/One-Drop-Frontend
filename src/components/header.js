@@ -23,7 +23,7 @@ const Header = () => {
         <Link className="nav-link" to="/">
           Find Donor
         </Link>
-        <a className="nav-link" onClick={() => (window.location = "/profile")}>
+        <a className="nav-link" onClick={() => navigate("/profile")}>
           Profile
         </a>
 
