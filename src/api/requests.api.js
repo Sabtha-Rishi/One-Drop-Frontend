@@ -7,7 +7,7 @@ const allRequests = async (setRequestsData) => {
     const response = await axios
       .create()
       .get(
-        "http://localhost:8000/requests"
+        "http://onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/requests"
       );
     if (response.data.isSuccess) {
       setRequestsData(response.data.requests);
@@ -28,7 +28,9 @@ const singleRequest = async (setRequest, setDonors, reqId) => {
   try {
     const response = await axios
       .create()
-      .get(`http://localhost:8000/requests/${reqId}`);
+      .get(
+        `http://onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/requests/${reqId}`
+      );
     if (response.data.isSuccess) {
       setRequest(response.data.request);
       setDonors(response.data.donors);
@@ -51,7 +53,9 @@ const userRequests = async (setMyRequests) => {
   try {
     const response = await axios
       .create()
-      .get("http://localhost:8000/requests/my-request");
+      .get(
+        "http://onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/requests/my-request"
+      );
     if (response.data.isSuccess) {
       setMyRequests(response.data.requests);
     }

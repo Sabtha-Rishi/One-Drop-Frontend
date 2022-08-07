@@ -9,7 +9,7 @@ const singleDonor = () => {
   const userId = useParams().userId;
   useEffect(() => {
     AccountsAPI.getSingleUser(setDonor, userId);
-  });
+  }, []);
 
   return (
     <div>
