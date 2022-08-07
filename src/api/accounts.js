@@ -6,7 +6,7 @@ const register = async (newUser) => {
     const response = await axios
       .create()
       .post(
-        "http://onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/register",
+        "//onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/register",
         newUser,
         {
           headers: {
@@ -25,7 +25,7 @@ const login = async (data, setIsAuthenticated, setIsLoading) => {
     const response = await axios
       .create()
       .post(
-        "http://onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/login",
+        "//onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/login",
         data
       );
 
@@ -48,7 +48,7 @@ const logout = async (setIsAuthenticated, setUser) => {
     const response = await axios
       .create()
       .post(
-        "http://onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/logout"
+        "//onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/logout"
       );
 
     if (response.data.isSuccess) {
@@ -94,7 +94,7 @@ const getUser = async (setIsAuthenticated, setUser, setIsLoading) => {
     const response = await axios
       .create()
       .get(
-        "http://onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/user"
+        "//onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/user"
       );
     if (response.data.isAuthenticated) {
       setIsAuthenticated(true);
@@ -116,7 +116,7 @@ const getSingleUser = async (setUser, id) => {
     const response = await axios
       .create()
       .get(
-        `http://onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/${id}`
+        `//onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/${id}`
       );
 
     if (response.data.isSuccess) {
@@ -135,7 +135,7 @@ const isAuthenticated = async (setIsAuthenticated, setIsLoading) => {
     const response = await axios
       .create()
       .get(
-        "http://onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/user"
+        "//onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/user"
       );
     if (response.data.isAuthenticated) {
       setIsAuthenticated(true);
@@ -156,7 +156,7 @@ const updateUser = async (setIsUpdated, data, setUser) => {
     const response = await axios
       .create()
       .post(
-        "http://onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/user/update",
+        "//onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/user/update",
         data
       );
 
