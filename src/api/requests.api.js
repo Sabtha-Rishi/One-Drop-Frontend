@@ -6,9 +6,7 @@ const allRequests = async (setRequestsData) => {
   try {
     const response = await axios
       .create()
-      .get(
-        "http://onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/requests"
-      );
+      .get("https://one-drop.herokuapp.com/requests");
     if (response.data.isSuccess) {
       setRequestsData(response.data.requests);
     }
@@ -28,9 +26,7 @@ const singleRequest = async (setRequest, setDonors, reqId) => {
   try {
     const response = await axios
       .create()
-      .get(
-        `http://onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/requests/${reqId}`
-      );
+      .get(`https://one-drop.herokuapp.com/requests/${reqId}`);
     if (response.data.isSuccess) {
       setRequest(response.data.request);
       setDonors(response.data.donors);
@@ -53,9 +49,7 @@ const userRequests = async (setMyRequests) => {
   try {
     const response = await axios
       .create()
-      .get(
-        "http://onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/requests/my-request"
-      );
+      .get("https://one-drop.herokuapp.com/requests/my-request");
     if (response.data.isSuccess) {
       setMyRequests(response.data.requests);
     }

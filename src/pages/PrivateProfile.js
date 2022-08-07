@@ -35,13 +35,13 @@ const PrivateProfile = ({ isAuthenticated, setIsAuthenticated }) => {
     setIsUpdated(false);
   }, [isUpdated]);
 
-  useEffect(() => {
-    if (isEditing) {
-      document.getElementsByClassName("overlay")[0].style.display = "flex";
-    } else {
-      document.getElementsByClassName("overlay")[0].style.display = "none";
-    }
-  }, [isEditing]);
+  // useEffect(() => {
+  //   if (isEditing) {
+  //     document.getElementsByClassName("overlay")[0].style.display = "flex";
+  //   } else {
+  //     document.getElementsByClassName("overlay")[0].style.display = "none";
+  //   }
+  // }, [isEditing]);
 
   if (isLoading){
     return <Loading/>
