@@ -5,15 +5,11 @@ const register = async (newUser) => {
   try {
     const response = await axios
       .create()
-      .post(
-        "//onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/register",
-        newUser,
-        {
-          headers: {
-            "content-type": "multipart/form-data",
-          },
-        }
-      );
+      .post("http://localhost:8000/accounts/register", newUser, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
     return response.data.isSuccess;
   } catch (err) {
     // console.log(err.message);
@@ -24,10 +20,7 @@ const login = async (data, setIsAuthenticated, setIsLoading) => {
   try {
     const response = await axios
       .create()
-      .post(
-        "//onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/login",
-        data
-      );
+      .post("http://localhost:8000/accounts/login", data);
 
     if (response.data.isAuthenticated) {
       setIsAuthenticated(true);
@@ -47,9 +40,7 @@ const logout = async (setIsAuthenticated, setUser) => {
   try {
     const response = await axios
       .create()
-      .post(
-        "//onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/logout"
-      );
+      .post("http://localhost:8000/accounts/logout");
 
     if (response.data.isSuccess) {
       setIsAuthenticated(false);
@@ -93,9 +84,7 @@ const getUser = async (setIsAuthenticated, setUser, setIsLoading) => {
   try {
     const response = await axios
       .create()
-      .get(
-        "//onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/user"
-      );
+      .get("http://localhost:8000/accounts/user");
     if (response.data.isAuthenticated) {
       setIsAuthenticated(true);
       setUser(response.data.user);
@@ -115,9 +104,7 @@ const getSingleUser = async (setUser, id) => {
   try {
     const response = await axios
       .create()
-      .get(
-        `//onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/${id}`
-      );
+      .get(`http://localhost:8000/accounts/${id}`);
 
     if (response.data.isSuccess) {
       setUser(response.data.user);
@@ -134,9 +121,7 @@ const isAuthenticated = async (setIsAuthenticated, setIsLoading) => {
   try {
     const response = await axios
       .create()
-      .get(
-        "//onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/accounts/user"
-      );
+      .get("http://localhost:8000/accounts/user");
     if (response.data.isAuthenticated) {
       setIsAuthenticated(true);
     }
@@ -155,10 +140,7 @@ const updateUser = async (setIsUpdated, data, setUser) => {
   try {
     const response = await axios
       .create()
-      .post(
-        "//onedrop-backend-env.eba-23i3k6ca.us-west-1.elasticbeanstalk.com/user/update",
-        data
-      );
+      .post("http://localhost:8000/user/update", data);
 
     if (response.data.isUpdated) {
       setIsUpdated(true);
