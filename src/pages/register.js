@@ -6,6 +6,7 @@ import data from "../components/__data";
 import Input from "../components/formInput";
 import gif from "../Media/register-form.gif";
 import successGif from "../Media/register.gif";
+import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 
 import AccountsAPI from "../api/accounts";
 
@@ -46,7 +47,7 @@ const AjaxRegister = () => {
     console.log(AccountsAPI.register(newUser));
   };
 
-  console.log(newUser)
+  console.log(newUser);
 
   return (
     <Form
@@ -94,7 +95,7 @@ const AjaxRegister = () => {
             onClick={() => navigate("/accounts/login")}
           >
             {" "}
-            Already have an account?
+            Login <HiOutlineArrowNarrowRight />
           </p>
         </div>
       )}
@@ -121,6 +122,7 @@ const Form = styled.div`
     & {
       min-width: 95vw;
       max-width: 95vw;
+      min-height: 85vh;
       margin: auto;
     }
   }
@@ -139,7 +141,8 @@ const Form = styled.div`
   }
   .login-footer {
     display: flex;
-    text-decoration: underline;
+    gap: 0 5px;
+    font-weight: 600;
     align-items: center;
     justify-content: center;
     margin-top: auto;
@@ -174,7 +177,7 @@ const Form = styled.div`
     max-width: 100%;
   }
 
-  .reg-container{
+  .reg-container {
     display: flex;
     flex-direction: column;
     align-items: center;

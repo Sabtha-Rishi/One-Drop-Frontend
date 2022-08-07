@@ -51,12 +51,8 @@ const formInput = ({
               >
                 {field.options.map((option) => {
                   return (
-                    
-                    <option
-                      className="input-option"
-                      name={field.name}
-                    >
-                      {option.length>0 && option}
+                    <option className="input-option" name={field.name}>
+                      {option.length > 0 && option}
                     </option>
                   );
                 })}
@@ -132,6 +128,11 @@ const Input = styled.div`
     padding-left: 10px;
   }
 
+  input:valid {
+    font-size: larger;
+    text-align: center;
+    font-weight: 900;
+  }
   .gif {
     width: 300px;
     margin: 0 auto;

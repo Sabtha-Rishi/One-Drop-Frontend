@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Loading from "../pages/loading";
+
 import DonorProfile from "../components/donorProfile";
 import EditProfile from "../components/editProfile";
 import Popup from "reactjs-popup";
@@ -10,12 +12,19 @@ const PrivateProfile = ({ isAuthenticated, setIsAuthenticated }) => {
   const [user, setUser] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
+  console.log(isAuthenticated)
+
   useEffect(() => {
-    AccountsAPI.getUser(setIsAuthenticated, setUser);
+    if (!isAuthenticated) {
+      navigate("/accounts/login");
+    }
+    AccountsAPI.getUser(setIsAuthenticated, setUser, setIsLoading);
   }, []);
+
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/accounts/login");
@@ -29,13 +38,17 @@ const PrivateProfile = ({ isAuthenticated, setIsAuthenticated }) => {
     setIsUpdated(false);
   }, [isUpdated]);
 
-  useEffect(() => {
-    if (isEditing) {
-      document.getElementsByClassName("overlay")[0].style.display = "flex";
-    } else {
-      document.getElementsByClassName("overlay")[0].style.display = "none";
-    }
-  }, [isEditing]);
+  // useEffect(() => {
+  //   if (isEditing) {
+  //     document.getElementsByClassName("overlay")[0].style.display = "flex";
+  //   } else {
+  //     document.getElementsByClassName("overlay")[0].style.display = "none";
+  //   }
+  // }, [isEditing]);
+
+  if (isLoading){
+    return <Loading/>
+  }
 
   const handleLogout = () => {
     AccountsAPI.logout(setIsAuthenticated, setUser);

@@ -13,7 +13,11 @@ import Register from "./pages/register";
 import Requests from "./pages/requests";
 import MyProfile from "./pages/PrivateProfile";
 import Login from "./pages/login";
+import Loading from "./pages/loading";
+
 import Header from "./components/header";
+import Footer from "./components/footer";
+
 import MyRequests from "./components/myRequests";
 import SingleRequest from "./pages/singleRequest";
 import SingleDonor from "./pages/singleDonor";
@@ -21,9 +25,16 @@ import SingleDonor from "./pages/singleDonor";
 import AccountsAPI from "./api/accounts";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    AccountsAPI.isAuthenticated(setIsAuthenticated);
+    AccountsAPI.isAuthenticated(setIsAuthenticated, setIsLoading);
   }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+  console.log(isAuthenticated, 'app');
   return (
     <Router>
       <Header />
@@ -58,6 +69,7 @@ function App() {
         {/* OTHER ROUTES */}
         <Route exact path="/" element={<Home />} />
       </Routes>
+      {/* <Footer /> */}
     </Router>
   );
 }

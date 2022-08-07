@@ -3,15 +3,18 @@ import styled from "styled-components";
 import loginGif from "../Media/loginGif.gif";
 import AccountsAPI from "../api/accounts";
 import { useNavigate } from "react-router-dom";
+import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 
 const Login = ({ isAuthenticated, setIsAuthenticated }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   console.log(isAuthenticated);
+
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated ) {
       navigate("/profile");
     }
   }, [isAuthenticated]);
@@ -23,12 +26,14 @@ const Login = ({ isAuthenticated, setIsAuthenticated }) => {
       email: email,
       password: password,
     };
-    AccountsAPI.login(formData, setIsAuthenticated);
+    setIsLoading(true);
+    AccountsAPI.login(formData, setIsAuthenticated, setIsLoading);
   };
+
 
   return (
     <LoginContainer>
-      {isAuthenticated ? (
+      {isAuthenticated & !isLoading ? (
         navigate("/profile")
       ) : (
         <div>
@@ -66,6 +71,13 @@ const Login = ({ isAuthenticated, setIsAuthenticated }) => {
           </form>
         </div>
       )}
+      <p
+        className="register-footer"
+        onClick={() => navigate("/accounts/register")}
+      >
+        {" "}
+        Create account <HiOutlineArrowNarrowRight />
+      </p>
     </LoginContainer>
   );
 };
@@ -115,6 +127,15 @@ const LoginContainer = styled.div`
     color: white;
     font-size: large;
     padding: 5px 0;
+  }
+  .register-footer {
+    display: flex;
+    padding-top: 15px;
+    font-weight: 600;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    cursor: pointer;
   }
 
   .login-title {

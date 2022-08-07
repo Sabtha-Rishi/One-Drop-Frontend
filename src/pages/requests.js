@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import RequestList from '../components/requestList';
+import Filter from "../components/requestFilter";
+
 import RequestsApi from '../api/requests.api';
 
 const Requests = () => {
@@ -13,6 +15,7 @@ const Requests = () => {
 	return (
 		<div>
 			<RequestList requests={requestsData} />
+      <Filter requestsData={requestsData} setRequestData={setRequestsData}/>
 		</div>
 	);
 };
