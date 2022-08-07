@@ -1,5 +1,3 @@
-import React, { useEffect } from "react";
-import data from "../components/__data";
 import styled from "styled-components";
 import profile from "../Media/sas.jpg";
 import { RiWhatsappFill, RiGenderlessFill } from "react-icons/ri";
@@ -13,7 +11,7 @@ import { GoPrimitiveDot } from "react-icons/go";
 
 const DonorProfile = ({ user }) => {
   
-  const donordata = user || data.singleDonor;
+  const donordata = user
   let base64string;
 
   if (Object.keys(user).length > 3) {
