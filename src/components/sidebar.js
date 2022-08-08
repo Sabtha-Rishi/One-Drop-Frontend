@@ -5,12 +5,16 @@ import { AiFillHome } from "react-icons/ai";
 import { FaUser, FaQuestion, FaHeart } from "react-icons/fa";
 import { TiPlus } from "react-icons/ti";
 
-const sidebar = () => {
+const sidebar = ({ toggleSidebar }) => {
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
+  const handleDonateClick = () => {
+    toggleSidebar();
+    navigate("/requests");
+  };
   return (
     <BottomBar>
-      <ul className="navigation-small">
+      <ul className="navigation-small" onClick={toggleSidebar}>
         <Link className="nav-link" to="/profile">
           <div className="nav-block">
             <FaUser /> My Profile
@@ -33,7 +37,7 @@ const sidebar = () => {
           </div>
         </Link>
       </ul>
-      <button className="nav-link-donate" onClick={() => navigate("/requests")}>
+      <button className="nav-link-donate" onClick={handleDonateClick}>
         Donate{" "}
       </button>
       <p className="watermark">

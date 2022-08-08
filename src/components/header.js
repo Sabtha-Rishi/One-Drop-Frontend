@@ -5,15 +5,18 @@ import Sidebar from "./sidebar";
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  
+const toggleSidebar = () => {
+  setIsSidebarOpen((prev) => !prev);
+};
 
   return (
     <HeaderCont>
       <NavBar
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
+        toggleSidebar={toggleSidebar}
       />
-      {isSidebarOpen && <Sidebar />}
+      {isSidebarOpen && <Sidebar toggleSidebar={toggleSidebar} />}
     </HeaderCont>
   );
 };

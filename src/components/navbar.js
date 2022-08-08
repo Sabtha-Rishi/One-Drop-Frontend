@@ -7,11 +7,9 @@ import { HiOutlineMenu } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
 
 
-const NavBar = ({isSidebarOpen, setIsSidebarOpen}) => {
+const NavBar = ({isSidebarOpen, toggleSidebar}) => {
   const navigate = useNavigate();
-  const toggleSidebar = () => {
-    setIsSidebarOpen((prev) => !prev);
-  };
+  
 
   return (
     <NavbarCont>
