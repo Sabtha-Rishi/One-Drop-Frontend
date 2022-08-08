@@ -4,9 +4,7 @@ axios.defaults.withCredentials = true;
 
 const allRequests = async (setRequestsData) => {
   try {
-    const response = await axios
-      .create()
-      .get("https://one-drop.herokuapp.com/requests");
+    const response = await axios.create().get("http://localhost:8000/requests");
     if (response.data.isSuccess) {
       setRequestsData(response.data.requests);
     }
@@ -26,7 +24,7 @@ const singleRequest = async (setRequest, setDonors, reqId) => {
   try {
     const response = await axios
       .create()
-      .get(`https://one-drop.herokuapp.com/requests/${reqId}`);
+      .get(`http://localhost:8000/requests/${reqId}`);
     if (response.data.isSuccess) {
       setRequest(response.data.request);
       setDonors(response.data.donors);
@@ -49,7 +47,7 @@ const userRequests = async (setMyRequests) => {
   try {
     const response = await axios
       .create()
-      .get("https://one-drop.herokuapp.com/requests/my-request");
+      .get("http://localhost:8000/requests/my-request");
     if (response.data.isSuccess) {
       setMyRequests(response.data.requests);
     }

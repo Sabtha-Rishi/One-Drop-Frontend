@@ -16,6 +16,8 @@ import Login from "./pages/login";
 import Loading from "./pages/loading";
 
 import Header from "./components/header";
+import BottomNav from "./components/sidebar";
+
 import Footer from "./components/footer";
 
 import MyRequests from "./components/myRequests";
@@ -34,7 +36,7 @@ function App() {
   if (isLoading) {
     return <Loading />;
   }
-  console.log(isAuthenticated, 'app');
+  console.log(isAuthenticated, "app");
   return (
     <Router>
       <Header />
