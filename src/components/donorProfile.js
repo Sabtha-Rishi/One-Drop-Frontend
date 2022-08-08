@@ -8,15 +8,15 @@ import { TiTick } from "react-icons/ti";
 import { BsFillCalendarDateFill } from "react-icons/bs";
 import { GoPrimitiveDot } from "react-icons/go";
 
-
 const DonorProfile = ({ user }) => {
-  
-  const donordata = user
+  const donordata = user;
   let base64string;
 
   if (Object.keys(user).length > 3) {
     base64string = btoa(
-      String.fromCharCode(...new Uint8Array(user.profilePic.data.data))
+      new Uint8Array(user.profilePic.data.data).reduce(function (data, byte) {
+        return data + String.fromCharCode(byte);
+      }, "")
     );
   }
 
