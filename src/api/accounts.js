@@ -1,7 +1,8 @@
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
-const BASE_URL = "https://one-drop.herokuapp.com/";
+// const BASE_URL = "https://one-drop.herokuapp.com/";
+const BASE_URL = "http://localhost:8000/";
 
 const register = async (newUser) => {
   try {
@@ -109,13 +110,14 @@ const isAuthenticated = async (setIsAuthenticated, setIsLoading) => {
   }
 };
 
-const updateUser = async (setIsUpdated, data, setUser) => {
+const updateUser = async (setIsUpdated, data, setUser, setIsEditing) => {
   try {
     const response = await axios.create().post(`${BASE_URL}user/update/`, data);
 
     if (response.data.isUpdated) {
       setIsUpdated(true);
       setUser(response.data.user);
+      setIsEditing(false);
       return;
     }
     if (!response.data.isUpdated) {

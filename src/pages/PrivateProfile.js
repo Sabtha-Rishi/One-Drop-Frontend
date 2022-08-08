@@ -16,8 +16,6 @@ const PrivateProfile = ({ isAuthenticated, setIsAuthenticated }) => {
 
   const navigate = useNavigate();
 
-  console.log(isAuthenticated);
-
   useEffect(() => {
     AccountsAPI.getUser(setIsAuthenticated, setUser, setIsLoading);
   }, []);

@@ -15,8 +15,8 @@ const EditProfile = ({ user, setIsEditing, setUser, setIsUpdated }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    AccountsAPI.updateUser(setIsUpdated, currentUser, setUser);
-    setIsEditing(false);
+    AccountsAPI.updateUser(setIsUpdated, currentUser, setUser, setIsEditing);
+    
   };
   return (
     <Editor>
