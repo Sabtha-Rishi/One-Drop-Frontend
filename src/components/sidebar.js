@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AiFillHome } from "react-icons/ai";
 import { FaUser, FaQuestion, FaHeart } from "react-icons/fa";
 import { TiPlus } from "react-icons/ti";
 
 const sidebar = () => {
+
+  const navigate = useNavigate()
   return (
     <BottomBar>
       <ul className="navigation-small">
