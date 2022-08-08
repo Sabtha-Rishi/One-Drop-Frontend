@@ -1,23 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import RequestList from '../components/requestList';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import RequestList from "../components/requestList";
 import Filter from "../components/requestFilter";
+import Loading from "./loading";
 
-import RequestsApi from '../api/requests.api';
+import RequestsApi from "../api/requests.api";
 
 const Requests = () => {
-	const [requestsData, setRequestsData] = useState([]);
+  const [requestsData, setRequestsData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-	useEffect(() => {
-		RequestsApi.allRequests(setRequestsData);
-	}, []);
+  useEffect(() => {
+    RequestsApi.allRequests(setRequestsData, setIsLoading);
+  }, []);
 
-	return (
-		<div>
-			<RequestList requests={requestsData} />
-      <Filter requestsData={requestsData} setRequestData={setRequestsData}/>
-		</div>
-	);
+  if (isLoading) {
+    return <Loading />;
+  }
+  return (
+    <div>
+      <RequestList requests={requestsData} />
+      <Filter requestsData={requestsData} setRequestData={setRequestsData} />
+    </div>
+  );
 };
 
 export default Requests;

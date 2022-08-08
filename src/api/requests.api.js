@@ -4,7 +4,7 @@ axios.defaults.withCredentials = true;
 
 const BASE_URL = "https://one-drop.herokuapp.com/";
 
-const allRequests = async (setRequestsData) => {
+const allRequests = async (setRequestsData, setIsLoading) => {
   try {
     const response = await axios.create().get(`${BASE_URL}requests/`);
     if (response.data.isSuccess) {
@@ -19,14 +19,14 @@ const allRequests = async (setRequestsData) => {
   } catch (err) {
     console.log(err.message);
     setRequestsData([]);
+  }finally{
+    setIsLoading(false)
   }
 };
 
-const singleRequest = async (setRequest, setDonors, reqId) => {
+const singleRequest = async (setRequest, setDonors, reqId, setIsLoading) => {
   try {
-    const response = await axios
-      .create()
-      .get(`${BASE_URL}requests/${reqId}`);
+    const response = await axios.create().get(`${BASE_URL}requests/${reqId}`);
     if (response.data.isSuccess) {
       setRequest(response.data.request);
       setDonors(response.data.donors);
@@ -42,6 +42,8 @@ const singleRequest = async (setRequest, setDonors, reqId) => {
     console.log(err.message);
     setRequest([]);
     setDonors([]);
+  } finally {
+    setIsLoading(false);
   }
 };
 

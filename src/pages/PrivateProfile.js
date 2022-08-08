@@ -60,7 +60,7 @@ const PrivateProfile = ({ isAuthenticated, setIsAuthenticated }) => {
 
   return (
     <Profile>
-      {isAuthenticated && (
+      {isAuthenticated  && (
         <>
           <DonorProfile
             user={user}
