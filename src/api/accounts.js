@@ -1,11 +1,13 @@
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
+const BASE_URL = "https://one-drop.herokuapp.com/";
+
 const register = async (newUser) => {
   try {
     const response = await axios
       .create()
-      .post("http://localhost:8000/accounts/register", newUser, {
+      .post(`${BASE_URL}accounts/register/`, newUser, {
         headers: {
           "content-type": "multipart/form-data",
         },
@@ -20,7 +22,7 @@ const login = async (data, setIsAuthenticated, setIsLoading) => {
   try {
     const response = await axios
       .create()
-      .post("http://localhost:8000/accounts/login", data);
+      .post(`${BASE_URL}accounts/login/`, data);
 
     if (response.data.isAuthenticated) {
       setIsAuthenticated(true);
@@ -38,9 +40,7 @@ const login = async (data, setIsAuthenticated, setIsLoading) => {
 
 const logout = async (setIsAuthenticated, setUser) => {
   try {
-    const response = await axios
-      .create()
-      .post("http://localhost:8000/accounts/logout");
+    const response = await axios.create().post(`${BASE_URL}accounts/logout/`);
 
     if (response.data.isSuccess) {
       setIsAuthenticated(false);
@@ -57,9 +57,7 @@ const logout = async (setIsAuthenticated, setUser) => {
 
 const getUser = async (setIsAuthenticated, setUser, setIsLoading) => {
   try {
-    const response = await axios
-      .create()
-      .get("http://localhost:8000/accounts/user");
+    const response = await axios.create().get(`${BASE_URL}accounts/user/`);
     if (response.data.isAuthenticated) {
       setIsAuthenticated(true);
       setUser(response.data.user);
@@ -81,9 +79,7 @@ const getUser = async (setIsAuthenticated, setUser, setIsLoading) => {
 
 const getSingleUser = async (setUser, id) => {
   try {
-    const response = await axios
-      .create()
-      .get(`http://localhost:8000/accounts/${id}`);
+    const response = await axios.create().get(`${BASE_URL}accounts/${id}/`);
 
     if (response.data.isSuccess) {
       setUser(response.data.user);
@@ -98,9 +94,7 @@ const getSingleUser = async (setUser, id) => {
 
 const isAuthenticated = async (setIsAuthenticated, setIsLoading) => {
   try {
-    const response = await axios
-      .create()
-      .get("http://localhost:8000/accounts/user");
+    const response = await axios.create().get(`${BASE_URL}accounts/user/`);
     if (response.data.isAuthenticated) {
       setIsAuthenticated(true);
     }
@@ -117,9 +111,7 @@ const isAuthenticated = async (setIsAuthenticated, setIsLoading) => {
 
 const updateUser = async (setIsUpdated, data, setUser) => {
   try {
-    const response = await axios
-      .create()
-      .post("http://localhost:8000/user/update", data);
+    const response = await axios.create().post(`${BASE_URL}user/update/`, data);
 
     if (response.data.isUpdated) {
       setIsUpdated(true);

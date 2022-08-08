@@ -16,11 +16,11 @@ const PrivateProfile = ({ isAuthenticated, setIsAuthenticated }) => {
 
   const navigate = useNavigate();
 
-  console.log(isAuthenticated)
+  console.log(isAuthenticated);
 
   useEffect(() => {
     AccountsAPI.getUser(setIsAuthenticated, setUser, setIsLoading);
-  },[]);
+  }, []);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -30,21 +30,24 @@ const PrivateProfile = ({ isAuthenticated, setIsAuthenticated }) => {
 
   useEffect(() => {
     if (isUpdated) {
-      AccountsAPI.getUser(setIsAuthenticated, setUser);
+      setIsLoading(true)
+      AccountsAPI.getUser(setIsAuthenticated, setUser, setIsLoading);
     }
     setIsUpdated(false);
   }, [isUpdated]);
 
-  // useEffect(() => {
-  //   if (isEditing) {
-  //     document.getElementsByClassName("overlay")[0].style.display = "flex";
-  //   } else {
-  //     document.getElementsByClassName("overlay")[0].style.display = "none";
-  //   }
-  // }, [isEditing]);
+  useEffect(() => {
+    if (!isLoading) {
+      if (isEditing) {
+        document.getElementsByClassName("overlay")[0].style.display = "flex";
+      } else {
+        document.getElementsByClassName("overlay")[0].style.display = "none";
+      }
+    }
+  }, [isEditing]);
 
-  if (isLoading){
-    return <Loading/>
+  if (isLoading) {
+    return <Loading />;
   }
 
   const handleLogout = () => {
